@@ -1,0 +1,88 @@
+1 - Criar a tabela Animal com os atributos: codanimal, nome, especie, sexo, cor e coddono
+2 - Criar a tabela Dono com os campos: coddono, nome, bairro
+3 - Definir uma subconsulta para retornar o nome do pet cujo dono mora no bairro Vila Nova
+4 - Definir uma consulta com join para retornar os donos (mesmo que não tenham pets associados) e a quantidade de pets que cada um possui
+
+https://github.com/MarceloPereiraAraujo/CONTEINER_ULTIMA
+https://aprendendoqanaultima.blogspot.com/
+
+Gostaria de FeedBack quanto aos exercícios enviados oara correção, já são mais de 3 meses de cursos, sem retorno, apenas encontros semanais. Sinto falta de alguém se apresentar para lidar com isso.
+
+CREATE DATABASE petshop
+	WITH
+	ENCODING = 'UTF8';
+
+USE petshop;
+	
+CREATE TABLE Dono (
+	coddono INT PRIMARY KEY,
+	nome varchar (50) not null,
+	bairro varchar (30) not null,
+);
+
+insert into Dono 
+	values (1, 'Marco', 'Vila Nova');
+
+insert into Dono 
+	values (2,'Maria', 'Vila da Mata');
+
+insert into Dono
+	values (3, 'Ana', 'Vila Madalena');
+
+
+CREATE TABLE Animal(
+	codanimal INT PRIMARY KEY,
+	nome varchar (50) not null,
+	especie varchar (30) not null,
+	sexo char not null,
+	cor varchar (20) not null, 
+	donopet INT, 
+	FOREIGN KEY (donopet) REFERENCES Dono(coddono)
+);
+
+	
+insert into Animal 
+	values (1, 'Caco', 'cachorro', 'm', 'caramelo', 1 );	
+
+insert into Animal 
+	values (6, 'Totó', 'cachorro', 'f', 'pardo', 1 );	
+	
+insert into Animal
+	values (3, 'Mié', 'gato', 'f', 'preto', 2 );	
+	
+insert into Animal
+	values (2, 'piupiu', 'periquito', 'macho', 'verde', 3 );
+
+insert into Animal
+	values (4, 'poppy', 'coelho', 'macho', 'marrom', 2 );
+
+insert into Animal
+	values (5, 'piui', 'canário', 'femea', 'amarelo', 1 );
+	
+	
+SELECT Animal.nome , dono.bairro
+FROM Animal
+inner join Dono on animal.donopet = dono.coddono;
+where Dono.bairro = 'Vila nova';
+
+SELECT Animal.nome , dono.bairro
+FROM Animal
+right join Dono on animal.donopet = dono.coddono
+where Dono.bairro in (select bairro from dono where bairro ='Vila nova');
+	
+select Dono.nome, count(*) animal.nome
+from dono
+inner join animal
+where dono.coddono = animal.donopet
+
+select count(*), animal.nome, dono.nome
+from dono group by animal.nome
+inner join animal
+where dono.coddono = animal.donopet
+	
+
+
+
+
+
+

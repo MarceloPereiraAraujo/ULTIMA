@@ -1,0 +1,51 @@
+div {
+    width: 950; height: 90;
+    background-color: rgb(193, 196, 197);
+    padding-top: 5;
+    padding-left: 50; 
+    padding-bottom: 10;
+}
+
+h1 {
+   font-size: 36px;
+   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   left: 50px;
+   top: 50px;
+  }
+
+.logar{
+    left: 900px;
+    top: 50px;
+    color: #5294F9;   
+    position: absolute;
+}
+
+.estudar {
+    left: 750px;
+    top: 50px;
+    position: absolute;
+}
+
+.curso {
+    left: 650px;
+    top: 50px;
+    position: absolute;
+}
+
+ul {
+        list-style: none;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        display: inline-flex;
+        
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none;
+    color:#5294F9
+}
+  

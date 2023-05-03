@@ -1,0 +1,83 @@
+1 - Criar a tabela Animal com os atributos: codanimal, nome, especie, sexo, cor e coddono
+2 - Criar a tabela Dono com os campos: coddono, nome, bairro
+3 - Definir uma subconsulta para retornar o nome do pet cujo dono mora no bairro Vila Nova
+4 - Definir uma consulta com join para retornar os donos (mesmo que não tenham pets associados) e a quantidade de pets que cada um possui
+
+
+
+CREATE DATABASE petshop
+	WITH
+	ENCODING = 'UTF8';
+
+USE petshop;
+
+
+//---------------------------- EXERCICIO 1 -------------------
+CREATE DATABASE petshop
+	WITH
+	ENCODING = 'UTF8';
+
+USE petshop;
+	
+CREATE TABLE Dono (
+	coddono INT PRIMARY KEY,
+	nome varchar (50) not null,
+	bairro varchar (30) not null,
+);
+
+//----------------- CADASTRO DE DONOS ------------------------
+insert into Dono 
+	values (1, 'Marco', 'Vila Nova');
+
+insert into Dono 
+	values (2,'Maria', 'Vila da Mata');
+
+insert into Dono
+	values (3, 'Ana', 'Vila Madalena');
+
+//---------------------------- EXERCICIO 2 -------------------
+
+CREATE TABLE Animal(
+	codanimal INT PRIMARY KEY,
+	nome varchar (50) not null,
+	especie varchar (30) not null,
+	sexo char not null,
+	cor varchar (20) not null, 
+	donopet INT, 
+	FOREIGN KEY (donopet) REFERENCES Dono(coddono)
+);
+
+//----------------- CADASTRO DE ANIMAIS ----------------------
+	
+insert into Animal 
+	values (1, 'Caco', 'cachorro', 'm', 'caramelo', 1 );	
+
+insert into Animal 
+	values (6, 'Totó', 'cachorro', 'f', 'pardo', 1 );	
+	
+insert into Animal
+	values (3, 'Mié', 'gato', 'f', 'preto', 2 );	
+	
+insert into Animal
+	values (2, 'piupiu', 'periquito', 'macho', 'verde', 3 );
+
+insert into Animal
+	values (4, 'poppy', 'coelho', 'macho', 'marrom', 2 );
+
+insert into Animal
+	values (5, 'piui', 'canário', 'femea', 'amarelo', 1 );
+
+
+//---------------------------- EXERCICIO 3 -------------------
+
+select a.nome as nomeAnimal, d.nome as nomeDono
+from animal a
+inner join dono d on a.donopet = d.coddono
+and d.bairro = 'Vila Nova'
+
+//---------------------------- EXERCICIO 4 -------------------
+
+select d.nome, count(a.nome) as TotalDeAnimais
+from animal a
+right join dono d on a.donopet = d.coddono
+group by (d.nome)
